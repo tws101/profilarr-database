@@ -2,24 +2,43 @@
 -- Quality Profiles
 -- Merged from Radarr data + Sonarr naming
 -- Bad Source = -1000 on all profiles (Radarr master)
+-- Proper quality groups matching original Arr configuration
 -- =============================================================================
 
--- -----------------------------------------------------------------------------
+-- =============================================================================
 -- 1. Main
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Main', 'Standard 1080p profile', 1, 0, 14, 1);
 
--- Qualities (simplified groups)
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Main', 'SDTV', 1, 1, 0),
-('Main', 'DVD', 2, 1, 0),
-('Main', 'DVD-R', 3, 1, 0),
-('Main', 'Bluray-480p', 4, 1, 0),
-('Main', 'Bluray-720p', 5, 1, 0),
-('Main', 'Bluray-1080p', 6, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Main', '480p'),
+('Main', '720p'),
+('Main', '1080p');
 
--- Custom Format scores
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Main', '480p', 'WEBDL-480p'),
+('Main', '480p', 'WEBRip-480p'),
+('Main', '480p', 'Bluray-576p'),
+('Main', '480p', 'Bluray-480p'),
+('Main', '720p', 'HDTV-720p'),
+('Main', '720p', 'WEBDL-720p'),
+('Main', '720p', 'WEBRip-720p'),
+('Main', '720p', 'Bluray-720p'),
+('Main', '1080p', 'HDTV-1080p'),
+('Main', '1080p', 'WEBRip-1080p'),
+('Main', '1080p', 'WEBDL-1080p'),
+('Main', '1080p', 'Remux-1080p'),
+('Main', '1080p', 'Bluray-1080p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Main', 'SDTV', NULL, 1, 1, 0),
+('Main', 'DVD', NULL, 2, 1, 0),
+('Main', 'DVD-R', NULL, 3, 1, 0),
+('Main', NULL, '480p', 4, 1, 0),
+('Main', NULL, '720p', 5, 1, 0),
+('Main', NULL, '1080p', 6, 1, 1);
+
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Main', '3D', 'all', -1000),
 ('Main', 'HDR', 'all', -1000),
@@ -31,19 +50,42 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Main', 'Surround', 'all', 5),
 ('Main', 'Subtitles English', 'all', 1);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Main', 'English', 'simple');
+
+-- =============================================================================
 -- 2. Anime
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Anime', 'Anime 1080p profile with dual audio preference', 1, 0, 19, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Anime', 'SDTV', 1, 1, 0),
-('Anime', 'DVD', 2, 1, 0),
-('Anime', 'DVD-R', 3, 1, 0),
-('Anime', 'Bluray-480p', 4, 1, 0),
-('Anime', 'Bluray-720p', 5, 1, 0),
-('Anime', 'Bluray-1080p', 6, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Anime', '480p'),
+('Anime', '720p'),
+('Anime', '1080p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Anime', '480p', 'WEBDL-480p'),
+('Anime', '480p', 'WEBRip-480p'),
+('Anime', '480p', 'Bluray-480p'),
+('Anime', '480p', 'Bluray-576p'),
+('Anime', '720p', 'HDTV-720p'),
+('Anime', '720p', 'WEBDL-720p'),
+('Anime', '720p', 'WEBRip-720p'),
+('Anime', '720p', 'Bluray-720p'),
+('Anime', '1080p', 'HDTV-1080p'),
+('Anime', '1080p', 'WEBDL-1080p'),
+('Anime', '1080p', 'WEBRip-1080p'),
+('Anime', '1080p', 'Remux-1080p'),
+('Anime', '1080p', 'Bluray-1080p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Anime', 'SDTV', NULL, 1, 1, 0),
+('Anime', 'DVD', NULL, 2, 1, 0),
+('Anime', 'DVD-R', NULL, 3, 1, 0),
+('Anime', NULL, '480p', 4, 1, 0),
+('Anime', NULL, '720p', 5, 1, 0),
+('Anime', NULL, '1080p', 6, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Anime', '3D', 'all', -1000),
@@ -59,19 +101,42 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Anime', 'Subtitles English', 'all', 1),
 ('Anime', 'Subs', 'all', 1);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Anime', 'Original', 'simple');
+
+-- =============================================================================
 -- 3. Foreign
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Foreign', 'Foreign language 1080p profile', 1, 0, 24, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Foreign', 'SDTV', 1, 1, 0),
-('Foreign', 'DVD', 2, 1, 0),
-('Foreign', 'DVD-R', 3, 1, 0),
-('Foreign', 'Bluray-480p', 4, 1, 0),
-('Foreign', 'Bluray-720p', 5, 1, 0),
-('Foreign', 'Bluray-1080p', 6, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Foreign', '480p'),
+('Foreign', '720p'),
+('Foreign', '1080p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Foreign', '480p', 'WEBDL-480p'),
+('Foreign', '480p', 'WEBRip-480p'),
+('Foreign', '480p', 'Bluray-480p'),
+('Foreign', '480p', 'Bluray-576p'),
+('Foreign', '720p', 'HDTV-720p'),
+('Foreign', '720p', 'WEBDL-720p'),
+('Foreign', '720p', 'WEBRip-720p'),
+('Foreign', '720p', 'Bluray-720p'),
+('Foreign', '1080p', 'HDTV-1080p'),
+('Foreign', '1080p', 'WEBRip-1080p'),
+('Foreign', '1080p', 'WEBDL-1080p'),
+('Foreign', '1080p', 'Remux-1080p'),
+('Foreign', '1080p', 'Bluray-1080p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Foreign', 'SDTV', NULL, 1, 1, 0),
+('Foreign', 'DVD', NULL, 2, 1, 0),
+('Foreign', 'DVD-R', NULL, 3, 1, 0),
+('Foreign', NULL, '480p', 4, 1, 0),
+('Foreign', NULL, '720p', 5, 1, 0),
+('Foreign', NULL, '1080p', 6, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Foreign', '3D', 'all', -1000),
@@ -87,19 +152,42 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Foreign', 'Subtitles English', 'all', 1),
 ('Foreign', 'Subs', 'all', 1);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Foreign', 'Any', 'simple');
+
+-- =============================================================================
 -- 4. Comedy
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Comedy', 'Simple comedy profile (no upgrades)', 0, 0, 1, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Comedy', 'SDTV', 1, 1, 0),
-('Comedy', 'DVD', 2, 1, 0),
-('Comedy', 'DVD-R', 3, 1, 0),
-('Comedy', 'Bluray-480p', 4, 1, 0),
-('Comedy', 'Bluray-720p', 5, 1, 0),
-('Comedy', 'Bluray-1080p', 6, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Comedy', '480p'),
+('Comedy', '720p'),
+('Comedy', '1080p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Comedy', '480p', 'WEBDL-480p'),
+('Comedy', '480p', 'WEBRip-480p'),
+('Comedy', '480p', 'Bluray-576p'),
+('Comedy', '480p', 'Bluray-480p'),
+('Comedy', '720p', 'HDTV-720p'),
+('Comedy', '720p', 'WEBDL-720p'),
+('Comedy', '720p', 'WEBRip-720p'),
+('Comedy', '720p', 'Bluray-720p'),
+('Comedy', '1080p', 'HDTV-1080p'),
+('Comedy', '1080p', 'WEBRip-1080p'),
+('Comedy', '1080p', 'WEBDL-1080p'),
+('Comedy', '1080p', 'Remux-1080p'),
+('Comedy', '1080p', 'Bluray-1080p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Comedy', 'SDTV', NULL, 1, 1, 0),
+('Comedy', 'DVD', NULL, 2, 1, 0),
+('Comedy', 'DVD-R', NULL, 3, 1, 0),
+('Comedy', NULL, '480p', 4, 1, 0),
+('Comedy', NULL, '720p', 5, 1, 0),
+('Comedy', NULL, '1080p', 6, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Comedy', '3D', 'all', -1000),
@@ -108,14 +196,28 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Comedy', '4KUHD', 'all', -1000),
 ('Comedy', '1080', 'all', 10);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Comedy', 'English', 'simple');
+
+-- =============================================================================
 -- 5. Ultra-HD
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Ultra-HD', '4K profile (HDR slightly penalized)', 1, 0, 14, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Ultra-HD', 'Bluray-2160p', 1, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Ultra-HD', '2160p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Ultra-HD', '2160p', 'HDTV-2160p'),
+('Ultra-HD', '2160p', 'BR-DISK'),
+('Ultra-HD', '2160p', 'WEBDL-2160p'),
+('Ultra-HD', '2160p', 'WEBRip-2160p'),
+('Ultra-HD', '2160p', 'Remux-2160p'),
+('Ultra-HD', '2160p', 'Bluray-2160p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Ultra-HD', NULL, '2160p', 1, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Ultra-HD', '720/1080', 'all', -1000),
@@ -130,14 +232,28 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Ultra-HD', 'Surround', 'all', 5),
 ('Ultra-HD', 'Subtitles English', 'all', 1);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Ultra-HD', 'English', 'simple');
+
+-- =============================================================================
 -- 6. Ultra-HD-HDR
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Ultra-HD-HDR', '4K profile with HDR preference', 1, 0, 19, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Ultra-HD-HDR', 'Bluray-2160p', 1, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Ultra-HD-HDR', '2160p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Ultra-HD-HDR', '2160p', 'HDTV-2160p'),
+('Ultra-HD-HDR', '2160p', 'BR-DISK'),
+('Ultra-HD-HDR', '2160p', 'Bluray-2160p'),
+('Ultra-HD-HDR', '2160p', 'WEBDL-2160p'),
+('Ultra-HD-HDR', '2160p', 'WEBRip-2160p'),
+('Ultra-HD-HDR', '2160p', 'Remux-2160p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Ultra-HD-HDR', NULL, '2160p', 1, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Ultra-HD-HDR', '720/1080', 'all', -1000),
@@ -152,14 +268,28 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Ultra-HD-HDR', 'Surround', 'all', 5),
 ('Ultra-HD-HDR', 'Subtitles English', 'all', 1);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Ultra-HD-HDR', 'English', 'simple');
+
+-- =============================================================================
 -- 7. Ultra-HD-HDR - Anime
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Ultra-HD-HDR - Anime', '4K Anime profile with dual audio + HDR preference', 1, 0, 24, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Ultra-HD-HDR - Anime', 'Bluray-2160p', 1, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Ultra-HD-HDR - Anime', '2160p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Ultra-HD-HDR - Anime', '2160p', 'HDTV-2160p'),
+('Ultra-HD-HDR - Anime', '2160p', 'BR-DISK'),
+('Ultra-HD-HDR - Anime', '2160p', 'WEBDL-2160p'),
+('Ultra-HD-HDR - Anime', '2160p', 'WEBRip-2160p'),
+('Ultra-HD-HDR - Anime', '2160p', 'Remux-2160p'),
+('Ultra-HD-HDR - Anime', '2160p', 'Bluray-2160p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Ultra-HD-HDR - Anime', NULL, '2160p', 1, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Ultra-HD-HDR - Anime', '720/1080', 'all', -1000),
@@ -177,14 +307,28 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Ultra-HD-HDR - Anime', 'Subtitles English', 'all', 1),
 ('Ultra-HD-HDR - Anime', 'Subs', 'all', 1);
 
--- -----------------------------------------------------------------------------
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Ultra-HD-HDR - Anime', 'Original', 'simple');
+
+-- =============================================================================
 -- 8. Ultra-HD-HDR - Foreign
--- -----------------------------------------------------------------------------
+-- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Ultra-HD-HDR - Foreign', '4K Foreign profile with original/English audio + HDR preference', 1, 0, 29, 1);
 
-INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, position, enabled, upgrade_until) VALUES
-('Ultra-HD-HDR - Foreign', 'Bluray-2160p', 1, 1, 1);
+INSERT INTO quality_groups (quality_profile_name, name) VALUES
+('Ultra-HD-HDR - Foreign', '2160p');
+
+INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
+('Ultra-HD-HDR - Foreign', '2160p', 'HDTV-2160p'),
+('Ultra-HD-HDR - Foreign', '2160p', 'BR-DISK'),
+('Ultra-HD-HDR - Foreign', '2160p', 'WEBDL-2160p'),
+('Ultra-HD-HDR - Foreign', '2160p', 'WEBRip-2160p'),
+('Ultra-HD-HDR - Foreign', '2160p', 'Remux-2160p'),
+('Ultra-HD-HDR - Foreign', '2160p', 'Bluray-2160p');
+
+INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
+('Ultra-HD-HDR - Foreign', NULL, '2160p', 1, 1, 1);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Ultra-HD-HDR - Foreign', '720/1080', 'all', -1000),
@@ -201,3 +345,6 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Ultra-HD-HDR - Foreign', 'Surround', 'all', 5),
 ('Ultra-HD-HDR - Foreign', 'Subtitles English', 'all', 1),
 ('Ultra-HD-HDR - Foreign', 'Subs', 'all', 1);
+
+INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
+('Ultra-HD-HDR - Foreign', 'Any', 'simple');
