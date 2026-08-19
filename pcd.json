@@ -1,7 +1,7 @@
 {
-    "name": "my-database",
+    "name": "Chronos Arr Database",
     "version": "1.0.0",
-    "description": "My custom Arr configurations",
+    "description": "Chronos Arr Database for Radarr and Sonarr including 4K Versions",
     "arr_types": ["radarr", "sonarr"],
 
     "dependencies": {
