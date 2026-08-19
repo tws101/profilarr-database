@@ -1,7 +1,8 @@
 -- =============================================================================
 -- Quality Profiles
--- Final state after description updates, renames, and quality restructuring
--- Bad Source = -1000 on all profiles
+-- Final merged state (includes Sonarr sync fixes from op 8)
+-- - DVD group removed; DVD standalone enabled, DVD-R standalone disabled
+-- - Bad Source scores = radarr only (-1000)
 -- =============================================================================
 
 -- =============================================================================
@@ -15,14 +16,11 @@ Will upgrade to 1080p.
 Not for 4K.', 1, 0, 14, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
-('Main', 'DVD'),
 ('Main', '480p'),
 ('Main', '720p'),
 ('Main', '1080p');
 
 INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
-('Main', 'DVD', 'DVD'),
-('Main', 'DVD', 'DVD-R'),
 ('Main', '480p', 'WEBDL-480p'),
 ('Main', '480p', 'WEBRip-480p'),
 ('Main', '480p', 'Bluray-576p'),
@@ -40,30 +38,31 @@ INSERT INTO quality_group_members (quality_profile_name, quality_group_name, qua
 INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
 ('Main', NULL, '1080p', 0, 1, 1),
 ('Main', NULL, '720p', 1, 1, 0),
-('Main', NULL, 'DVD', 2, 1, 0),
+('Main', 'DVD', NULL, 2, 1, 0),
 ('Main', NULL, '480p', 3, 1, 0),
 ('Main', 'SDTV', NULL, 4, 1, 0),
--- Disabled qualities (kept for completeness / future use)
-('Main', 'Bluray-2160p', NULL, 5, 0, 0),
-('Main', 'BR-DISK', NULL, 6, 0, 0),
-('Main', 'CAM', NULL, 7, 0, 0),
-('Main', 'DVDSCR', NULL, 8, 0, 0),
-('Main', 'HDTV-2160p', NULL, 9, 0, 0),
-('Main', 'HDTV-480p', NULL, 10, 0, 0),
-('Main', 'Raw-HD', NULL, 11, 0, 0),
-('Main', 'REGIONAL', NULL, 12, 0, 0),
-('Main', 'Remux-2160p', NULL, 13, 0, 0),
-('Main', 'TELECINE', NULL, 14, 0, 0),
-('Main', 'TELESYNC', NULL, 15, 0, 0),
-('Main', 'Unknown', NULL, 16, 0, 0),
-('Main', 'WEBDL-2160p', NULL, 17, 0, 0),
-('Main', 'WEBRip-2160p', NULL, 18, 0, 0),
-('Main', 'WORKPRINT', NULL, 19, 0, 0);
+('Main', 'DVD-R', NULL, 5, 0, 0),
+-- Disabled qualities
+('Main', 'Bluray-2160p', NULL, 6, 0, 0),
+('Main', 'BR-DISK', NULL, 7, 0, 0),
+('Main', 'CAM', NULL, 8, 0, 0),
+('Main', 'DVDSCR', NULL, 9, 0, 0),
+('Main', 'HDTV-2160p', NULL, 10, 0, 0),
+('Main', 'HDTV-480p', NULL, 11, 0, 0),
+('Main', 'Raw-HD', NULL, 12, 0, 0),
+('Main', 'REGIONAL', NULL, 13, 0, 0),
+('Main', 'Remux-2160p', NULL, 14, 0, 0),
+('Main', 'TELECINE', NULL, 15, 0, 0),
+('Main', 'TELESYNC', NULL, 16, 0, 0),
+('Main', 'Unknown', NULL, 17, 0, 0),
+('Main', 'WEBDL-2160p', NULL, 18, 0, 0),
+('Main', 'WEBRip-2160p', NULL, 19, 0, 0),
+('Main', 'WORKPRINT', NULL, 20, 0, 0);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Main', '3D', 'all', -1000),
 ('Main', 'HDR', 'all', -1000),
-('Main', 'Bad Source', 'all', -1000),
+('Main', 'Bad Source', 'radarr', -1000),
 ('Main', '4KUHD', 'all', -1000),
 ('Main', 'Not English Audio', 'all', -100),
 ('Main', '1.0 Mono', 'all', -50),
@@ -85,14 +84,11 @@ Will upgrade to 1080p.
 Not for 4K', 1, 0, 19, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
-('Anime', 'DVD'),
 ('Anime', '480p'),
 ('Anime', '720p'),
 ('Anime', '1080p');
 
 INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
-('Anime', 'DVD', 'DVD'),
-('Anime', 'DVD', 'DVD-R'),
 ('Anime', '480p', 'WEBDL-480p'),
 ('Anime', '480p', 'WEBRip-480p'),
 ('Anime', '480p', 'Bluray-480p'),
@@ -110,30 +106,31 @@ INSERT INTO quality_group_members (quality_profile_name, quality_group_name, qua
 INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
 ('Anime', NULL, '1080p', 0, 1, 1),
 ('Anime', NULL, '720p', 1, 1, 0),
-('Anime', NULL, 'DVD', 2, 1, 0),
+('Anime', 'DVD', NULL, 2, 1, 0),
 ('Anime', NULL, '480p', 3, 1, 0),
 ('Anime', 'SDTV', NULL, 4, 1, 0),
+('Anime', 'DVD-R', NULL, 5, 0, 0),
 -- Disabled qualities
-('Anime', 'Bluray-2160p', NULL, 5, 0, 0),
-('Anime', 'BR-DISK', NULL, 6, 0, 0),
-('Anime', 'CAM', NULL, 7, 0, 0),
-('Anime', 'DVDSCR', NULL, 8, 0, 0),
-('Anime', 'HDTV-2160p', NULL, 9, 0, 0),
-('Anime', 'HDTV-480p', NULL, 10, 0, 0),
-('Anime', 'Raw-HD', NULL, 11, 0, 0),
-('Anime', 'REGIONAL', NULL, 12, 0, 0),
-('Anime', 'Remux-2160p', NULL, 13, 0, 0),
-('Anime', 'TELECINE', NULL, 14, 0, 0),
-('Anime', 'TELESYNC', NULL, 15, 0, 0),
-('Anime', 'Unknown', NULL, 16, 0, 0),
-('Anime', 'WEBDL-2160p', NULL, 17, 0, 0),
-('Anime', 'WEBRip-2160p', NULL, 18, 0, 0),
-('Anime', 'WORKPRINT', NULL, 19, 0, 0);
+('Anime', 'Bluray-2160p', NULL, 6, 0, 0),
+('Anime', 'BR-DISK', NULL, 7, 0, 0),
+('Anime', 'CAM', NULL, 8, 0, 0),
+('Anime', 'DVDSCR', NULL, 9, 0, 0),
+('Anime', 'HDTV-2160p', NULL, 10, 0, 0),
+('Anime', 'HDTV-480p', NULL, 11, 0, 0),
+('Anime', 'Raw-HD', NULL, 12, 0, 0),
+('Anime', 'REGIONAL', NULL, 13, 0, 0),
+('Anime', 'Remux-2160p', NULL, 14, 0, 0),
+('Anime', 'TELECINE', NULL, 15, 0, 0),
+('Anime', 'TELESYNC', NULL, 16, 0, 0),
+('Anime', 'Unknown', NULL, 17, 0, 0),
+('Anime', 'WEBDL-2160p', NULL, 18, 0, 0),
+('Anime', 'WEBRip-2160p', NULL, 19, 0, 0),
+('Anime', 'WORKPRINT', NULL, 20, 0, 0);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Anime', '3D', 'all', -1000),
 ('Anime', 'HDR', 'all', -1000),
-('Anime', 'Bad Source', 'all', -1000),
+('Anime', 'Bad Source', 'radarr', -1000),
 ('Anime', '4KUHD', 'all', -1000),
 ('Anime', 'Not Subtitles English', 'all', -50),
 ('Anime', '1.0 Mono', 'all', -50),
@@ -158,14 +155,11 @@ Will upgrade to 1080p.
 Not for 4K.', 1, 0, 24, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
-('Foreign', 'DVD'),
 ('Foreign', '480p'),
 ('Foreign', '720p'),
 ('Foreign', '1080p');
 
 INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
-('Foreign', 'DVD', 'DVD'),
-('Foreign', 'DVD', 'DVD-R'),
 ('Foreign', '480p', 'WEBDL-480p'),
 ('Foreign', '480p', 'WEBRip-480p'),
 ('Foreign', '480p', 'Bluray-480p'),
@@ -183,30 +177,31 @@ INSERT INTO quality_group_members (quality_profile_name, quality_group_name, qua
 INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
 ('Foreign', NULL, '1080p', 0, 1, 1),
 ('Foreign', NULL, '720p', 1, 1, 0),
-('Foreign', NULL, 'DVD', 2, 1, 0),
+('Foreign', 'DVD', NULL, 2, 1, 0),
 ('Foreign', NULL, '480p', 3, 1, 0),
 ('Foreign', 'SDTV', NULL, 4, 1, 0),
+('Foreign', 'DVD-R', NULL, 5, 0, 0),
 -- Disabled qualities
-('Foreign', 'Bluray-2160p', NULL, 5, 0, 0),
-('Foreign', 'BR-DISK', NULL, 6, 0, 0),
-('Foreign', 'CAM', NULL, 7, 0, 0),
-('Foreign', 'DVDSCR', NULL, 8, 0, 0),
-('Foreign', 'HDTV-2160p', NULL, 9, 0, 0),
-('Foreign', 'HDTV-480p', NULL, 10, 0, 0),
-('Foreign', 'Raw-HD', NULL, 11, 0, 0),
-('Foreign', 'REGIONAL', NULL, 12, 0, 0),
-('Foreign', 'Remux-2160p', NULL, 13, 0, 0),
-('Foreign', 'TELECINE', NULL, 14, 0, 0),
-('Foreign', 'TELESYNC', NULL, 15, 0, 0),
-('Foreign', 'Unknown', NULL, 16, 0, 0),
-('Foreign', 'WEBDL-2160p', NULL, 17, 0, 0),
-('Foreign', 'WEBRip-2160p', NULL, 18, 0, 0),
-('Foreign', 'WORKPRINT', NULL, 19, 0, 0);
+('Foreign', 'Bluray-2160p', NULL, 6, 0, 0),
+('Foreign', 'BR-DISK', NULL, 7, 0, 0),
+('Foreign', 'CAM', NULL, 8, 0, 0),
+('Foreign', 'DVDSCR', NULL, 9, 0, 0),
+('Foreign', 'HDTV-2160p', NULL, 10, 0, 0),
+('Foreign', 'HDTV-480p', NULL, 11, 0, 0),
+('Foreign', 'Raw-HD', NULL, 12, 0, 0),
+('Foreign', 'REGIONAL', NULL, 13, 0, 0),
+('Foreign', 'Remux-2160p', NULL, 14, 0, 0),
+('Foreign', 'TELECINE', NULL, 15, 0, 0),
+('Foreign', 'TELESYNC', NULL, 16, 0, 0),
+('Foreign', 'Unknown', NULL, 17, 0, 0),
+('Foreign', 'WEBDL-2160p', NULL, 18, 0, 0),
+('Foreign', 'WEBRip-2160p', NULL, 19, 0, 0),
+('Foreign', 'WORKPRINT', NULL, 20, 0, 0);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Foreign', '3D', 'all', -1000),
 ('Foreign', 'HDR', 'all', -1000),
-('Foreign', 'Bad Source', 'all', -1000),
+('Foreign', 'Bad Source', 'radarr', -1000),
 ('Foreign', '4KUHD', 'all', -1000),
 ('Foreign', 'Not Subtitles English', 'all', -50),
 ('Foreign', '1.0 Mono', 'all', -50),
@@ -229,14 +224,11 @@ VALUES ('Comedy', 'Simple comedy profile for stand up comedy
 (no upgrades)', 0, 0, 1, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
-('Comedy', 'DVD'),
 ('Comedy', '480p'),
 ('Comedy', '720p'),
 ('Comedy', '1080p');
 
 INSERT INTO quality_group_members (quality_profile_name, quality_group_name, quality_name) VALUES
-('Comedy', 'DVD', 'DVD'),
-('Comedy', 'DVD', 'DVD-R'),
 ('Comedy', '480p', 'WEBDL-480p'),
 ('Comedy', '480p', 'WEBRip-480p'),
 ('Comedy', '480p', 'Bluray-576p'),
@@ -254,30 +246,31 @@ INSERT INTO quality_group_members (quality_profile_name, quality_group_name, qua
 INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quality_group_name, position, enabled, upgrade_until) VALUES
 ('Comedy', NULL, '1080p', 0, 1, 0),
 ('Comedy', NULL, '720p', 1, 1, 1),
-('Comedy', NULL, 'DVD', 2, 1, 0),
+('Comedy', 'DVD', NULL, 2, 1, 0),
 ('Comedy', NULL, '480p', 3, 1, 0),
 ('Comedy', 'SDTV', NULL, 4, 1, 0),
+('Comedy', 'DVD-R', NULL, 5, 0, 0),
 -- Disabled qualities
-('Comedy', 'Bluray-2160p', NULL, 5, 0, 0),
-('Comedy', 'BR-DISK', NULL, 6, 0, 0),
-('Comedy', 'CAM', NULL, 7, 0, 0),
-('Comedy', 'DVDSCR', NULL, 8, 0, 0),
-('Comedy', 'HDTV-2160p', NULL, 9, 0, 0),
-('Comedy', 'HDTV-480p', NULL, 10, 0, 0),
-('Comedy', 'Raw-HD', NULL, 11, 0, 0),
-('Comedy', 'REGIONAL', NULL, 12, 0, 0),
-('Comedy', 'Remux-2160p', NULL, 13, 0, 0),
-('Comedy', 'TELECINE', NULL, 14, 0, 0),
-('Comedy', 'TELESYNC', NULL, 15, 0, 0),
-('Comedy', 'Unknown', NULL, 16, 0, 0),
-('Comedy', 'WEBDL-2160p', NULL, 17, 0, 0),
-('Comedy', 'WEBRip-2160p', NULL, 18, 0, 0),
-('Comedy', 'WORKPRINT', NULL, 19, 0, 0);
+('Comedy', 'Bluray-2160p', NULL, 6, 0, 0),
+('Comedy', 'BR-DISK', NULL, 7, 0, 0),
+('Comedy', 'CAM', NULL, 8, 0, 0),
+('Comedy', 'DVDSCR', NULL, 9, 0, 0),
+('Comedy', 'HDTV-2160p', NULL, 10, 0, 0),
+('Comedy', 'HDTV-480p', NULL, 11, 0, 0),
+('Comedy', 'Raw-HD', NULL, 12, 0, 0),
+('Comedy', 'REGIONAL', NULL, 13, 0, 0),
+('Comedy', 'Remux-2160p', NULL, 14, 0, 0),
+('Comedy', 'TELECINE', NULL, 15, 0, 0),
+('Comedy', 'TELESYNC', NULL, 16, 0, 0),
+('Comedy', 'Unknown', NULL, 17, 0, 0),
+('Comedy', 'WEBDL-2160p', NULL, 18, 0, 0),
+('Comedy', 'WEBRip-2160p', NULL, 19, 0, 0),
+('Comedy', 'WORKPRINT', NULL, 20, 0, 0);
 
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Comedy', '3D', 'all', -1000),
 ('Comedy', 'HDR', 'all', -1000),
-('Comedy', 'Bad Source', 'all', -1000),
+('Comedy', 'Bad Source', 'radarr', -1000),
 ('Comedy', '4KUHD', 'all', -1000),
 ('Comedy', '1080', 'all', 10);
 
@@ -311,7 +304,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('4K SDR', 'DV Only (No HDR)', 'all', -1000),
 ('4K SDR', '3D', 'all', -1000),
 ('4K SDR', 'Low Resolution', 'all', -1000),
-('4K SDR', 'Bad Source', 'all', -1000),
+('4K SDR', 'Bad Source', 'radarr', -1000),
 ('4K SDR', 'Not English Audio', 'all', -100),
 ('4K SDR', '1.0 Mono', 'all', -50),
 ('4K SDR', '4KUHD', 'all', 10),
@@ -349,7 +342,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('4K HDR - Main', 'DV Only (No HDR)', 'all', -1000),
 ('4K HDR - Main', '3D', 'all', -1000),
 ('4K HDR - Main', 'Low Resolution', 'all', -1000),
-('4K HDR - Main', 'Bad Source', 'all', -1000),
+('4K HDR - Main', 'Bad Source', 'radarr', -1000),
 ('4K HDR - Main', 'Not English Audio', 'all', -50),
 ('4K HDR - Main', '1.0 Mono', 'all', -50),
 ('4K HDR - Main', '4KUHD', 'all', 10),
@@ -387,7 +380,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('4K HDR - Anime', 'DV Only (No HDR)', 'all', -1000),
 ('4K HDR - Anime', '3D', 'all', -1000),
 ('4K HDR - Anime', 'Low Resolution', 'all', -1000),
-('4K HDR - Anime', 'Bad Source', 'all', -1000),
+('4K HDR - Anime', 'Bad Source', 'radarr', -1000),
 ('4K HDR - Anime', 'Not Subtitles English', 'all', -50),
 ('4K HDR - Anime', '1.0 Mono', 'all', -50),
 ('4K HDR - Anime', '4KUHD', 'all', 10),
@@ -428,7 +421,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('4K HDR - Foreign', 'DV Only (No HDR)', 'all', -1000),
 ('4K HDR - Foreign', '3D', 'all', -1000),
 ('4K HDR - Foreign', 'Low Resolution', 'all', -1000),
-('4K HDR - Foreign', 'Bad Source', 'all', -1000),
+('4K HDR - Foreign', 'Bad Source', 'radarr', -1000),
 ('4K HDR - Foreign', 'Not Subtitles English', 'all', -50),
 ('4K HDR - Foreign', '1.0 Mono', 'all', -50),
 ('4K HDR - Foreign', '4KUHD', 'all', 10),

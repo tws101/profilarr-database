@@ -2,6 +2,7 @@
 -- Custom Formats
 -- Converted from existing Radarr / Sonarr instances
 -- References named regular expressions from 001_regular_expressions.sql
+-- Bad Source conditions restricted to radarr only (Sonarr has no CAM/TELESYNC/TELECINE)
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------
@@ -279,17 +280,17 @@ INSERT INTO condition_resolutions (custom_format_name, condition_name, resolutio
 ('Low Resolution', '576', '576p');
 
 -- -----------------------------------------------------------------------------
--- 21. Bad Source
+-- 21. Bad Source  (Radarr only — Sonarr has no CAM/TELESYNC/TELECINE sources)
 -- -----------------------------------------------------------------------------
 INSERT INTO custom_formats (name, description, include_in_rename) VALUES
 ('Bad Source', 'CAM / TELESYNC / TELECINE sources', 0);
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES
-('Bad Source', 'CAM', 'source', 'all', 0, 0),
-('Bad Source', 'TELESYNC', 'source', 'all', 0, 0),
-('Bad Source', 'TELECINE', 'source', 'all', 0, 0);
+('Bad Source', 'CAM', 'source', 'radarr', 0, 0),
+('Bad Source', 'TELESYNC', 'source', 'radarr', 0, 0),
+('Bad Source', 'TELECINE', 'source', 'radarr', 0, 0);
 
 INSERT INTO condition_sources (custom_format_name, condition_name, source) VALUES
-('Bad Source', 'CAM', 'CAM'),
-('Bad Source', 'TELESYNC', 'TELESYNC'),
-('Bad Source', 'TELECINE', 'TELECINE');
+('Bad Source', 'CAM', 'cam'),
+('Bad Source', 'TELESYNC', 'telesync'),
+('Bad Source', 'TELECINE', 'telecine');
