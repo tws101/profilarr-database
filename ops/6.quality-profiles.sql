@@ -1,8 +1,5 @@
 -- =============================================================================
 -- Quality Profiles
--- Final merged state (includes Sonarr sync fixes from op 8)
--- - DVD group removed; DVD standalone enabled, DVD-R standalone disabled
--- - Bad Source scores = radarr only (-1000)
 -- =============================================================================
 
 -- =============================================================================
