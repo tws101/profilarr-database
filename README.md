@@ -1,21 +1,27 @@
-# Profilarr Database Template
+# Chronos Arr – Profilarr Database
 
-Template for creating your own Profilarr-compliant database (PCD).
+Personal Profilarr-compliant database for the Chronos homelab Arr stack.
 
-## Quick Start
+## What’s included
 
-1. Click **"Use this template"** → **"Create a new repository"**
-2. Link the repository in Profilarr
-3. Edit the manifest to customize your database
-4. Start creating profiles and custom formats
+- Named regular expressions
+- Custom Formats (audio, HDR, language, resolution, sources)
+- Quality Definitions (Radarr + Sonarr)
+- Quality Profiles (Main, Anime, Foreign, Comedy, Ultra-HD, Ultra-HD-HDR + variants)
+- Naming & media management settings
 
 ## Structure
 
 ```
 ├── pcd.json      # Database manifest
-├── ops/          # Your configuration operations
-└── tweaks/       # Optional configuration variants
+├── ops/          # Configuration operations
+└── tweaks/       # Optional local variants
 ```
+## Usage
+
+1. Link this repository in Profilarr
+2. Assign it to your Radarr / Sonarr instances
+3. Sync
 
 ## Learn More
 
