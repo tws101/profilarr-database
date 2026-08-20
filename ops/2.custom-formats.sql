@@ -130,7 +130,7 @@ INSERT INTO condition_patterns (custom_format_name, condition_name, regular_expr
 -- 10. Not Subtitles English
 -- -----------------------------------------------------------------------------
 INSERT INTO custom_formats (name, description, include_in_rename) VALUES
-('Not Subtitles English', 'No English subtitles + HEVC + AC3/EAC3', 0);
+('Not Subtitles English', 'Used to check Tdarr post processing for: No English subtitles + HEVC + AC3/EAC3', 0);
 
 INSERT INTO custom_format_conditions (custom_format_name, name, type, arr_type, negate, required) VALUES
 ('Not Subtitles English', 'Not Subtitles in English', 'release_title', 'all', 1, 1),
