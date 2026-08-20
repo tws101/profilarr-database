@@ -8,7 +8,7 @@
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Main', 'HD profile for English.
 
-Will upgrade to 1080p.
+Will upgrade to 1080p. Audio 5.1 and 7.1 targeted.
 
 Not for 4K.', 1, 0, 14, 1);
 
@@ -76,7 +76,7 @@ INSERT INTO quality_profile_languages (quality_profile_name, language_name, type
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Anime', 'Anime HD profile with dual audio preference.  
 
-Will upgrade to 1080p.
+Will upgrade to 1080p. Audio 5.1 and 7.1 targeted.
 
 Not for 4K', 1, 0, 19, 1);
 
@@ -147,7 +147,7 @@ INSERT INTO quality_profile_languages (quality_profile_name, language_name, type
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('Foreign', 'HD profile for Foreign (non English).   Will try to get Original Audio and English Audio (both).
 
-Will upgrade to 1080p.
+Will upgrade to 1080p. Audio 5.1 and 7.1 targeted.
 
 Not for 4K.', 1, 0, 24, 1);
 
@@ -278,7 +278,9 @@ INSERT INTO quality_profile_languages (quality_profile_name, language_name, type
 -- 5. 4K SDR  (formerly Ultra-HD)
 -- =============================================================================
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
-VALUES ('4K SDR', '4K profile for English.  SDR ONLY
+VALUES ('4K SDR', '4K profile for English.  
+  
+SDR ONLY. Audio 5.1 and 7.1 targeted.
 
 This is for special cases where one would want an SDR version.', 1, 0, 14, 1);
 
@@ -318,7 +320,7 @@ INSERT INTO quality_profile_languages (quality_profile_name, language_name, type
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('4K HDR - Main', '4K profile for English.  
 
-HDR and 8 channel Audio are prioritized.', 1, 0, 19, 1);
+HDR and Audio 5.1 and 7.1 targeted.', 1, 0, 19, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
 ('4K HDR - Main', '2160p');
@@ -356,7 +358,7 @@ INSERT INTO quality_profile_languages (quality_profile_name, language_name, type
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('4K HDR - Anime', 'Anime 4K profile with dual audio preference.
 
-HDR is prioritized.', 1, 0, 24, 1);
+HDR and Audio 5.1 and 7.1 targeted.', 1, 0, 24, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
 ('4K HDR - Anime', '2160p');
@@ -397,7 +399,7 @@ INSERT INTO quality_profile_languages (quality_profile_name, language_name, type
 INSERT INTO quality_profiles (name, description, upgrades_allowed, minimum_custom_format_score, upgrade_until_score, upgrade_score_increment)
 VALUES ('4K HDR - Foreign', '4K profile for Foreign (non English).   Will try to get Original Audio and English Audio (both).
 
-HDR preference', 1, 0, 29, 1);
+HDR and Audio 5.1 and 7.1 targeted.', 1, 0, 29, 1);
 
 INSERT INTO quality_groups (quality_profile_name, name) VALUES
 ('4K HDR - Foreign', '2160p');
