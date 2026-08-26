@@ -206,6 +206,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Foreign', 'Original Audio', 'all', 5),
 ('Foreign', 'English Audio', 'all', 5),
 ('Foreign', 'Surround', 'all', 5),
+('Foreign', 'Dual Audio (Title Check)', 'all', 5),
 ('Foreign', 'Subtitles English', 'all', 1),
 ('Foreign', 'Subs', 'all', 1);
 
@@ -428,6 +429,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('4K HDR - Foreign', 'English Audio', 'all', 5),
 ('4K HDR - Foreign', 'HDR', 'all', 5),
 ('4K HDR - Foreign', 'Surround', 'all', 5),
+('4K HDR - Foreign', 'Dual Audio (Title Check)', 'all', 5),
 ('4K HDR - Foreign', 'Subtitles English', 'all', 1),
 ('4K HDR - Foreign', 'Subs', 'all', 1);
 
