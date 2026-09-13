@@ -59,6 +59,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Main', '3D', 'all', -100),
 ('Main', 'Bad Source', 'radarr', -100),
 ('Main', 'Not English Audio', 'all', -100),
+('Main', 'DV Only (No HDR)', 'all', -100),
 ('Main', '1.0 Mono', 'all', -5),
 ('Main', '4KUHD', 'all', 10),
 ('Main', '1080', 'all', 5),
@@ -125,6 +126,7 @@ INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quali
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Anime', '3D', 'all', -100),
 ('Anime', 'Bad Source', 'radarr', -100),
+('Anime', 'DV Only (No HDR)', 'all', -100),
 ('Anime', 'Not Subtitles English', 'all', -50),
 ('Anime', '1.0 Mono', 'all', -5),
 ('Anime', '4KUHD', 'all', 10),
@@ -195,6 +197,7 @@ INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quali
 INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_name, arr_type, score) VALUES
 ('Foreign', '3D', 'all', -100),
 ('Foreign', 'Bad Source', 'radarr', -100),
+('Foreign', 'DV Only (No HDR)', 'all', -100),
 ('Foreign', 'Not Subtitles English', 'all', -50),
 ('Foreign', '1.0 Mono', 'all', -5),
 ('Foreign', '4KUHD', 'all', 10),
