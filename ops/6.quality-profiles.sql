@@ -62,7 +62,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Main', 'DV Only (No HDR)', 'all', -100),
 ('Main', '1.0 Mono', 'all', -5),
 ('Main', '4KUHD', 'all', 10),
-('Main', '1080', 'all', 5),
+('Main', '720/1080', 'all', 5),
 ('Main', 'Surround', 'all', 5),
 ('Main', 'HDR', 'all', 5),
 ('Main', 'Subtitles English', 'all', 1);
@@ -130,7 +130,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Anime', 'Not Subtitles English', 'all', -50),
 ('Anime', '1.0 Mono', 'all', -5),
 ('Anime', '4KUHD', 'all', 10),
-('Anime', '1080', 'all', 5),
+('Anime', '720/1080', 'all', 5),
 ('Anime', 'Dual Audio (Title Check)', 'all', 5),
 ('Anime', 'Dual Audio (Eng Jpn)', 'all', 5),
 ('Anime', 'Surround', 'all', 5),
@@ -201,7 +201,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Foreign', 'Not Subtitles English', 'all', -50),
 ('Foreign', '1.0 Mono', 'all', -5),
 ('Foreign', '4KUHD', 'all', 10),
-('Foreign', '1080', 'all', 5),
+('Foreign', '720/1080', 'all', 5),
 ('Foreign', 'Original Audio', 'all', 5),
 ('Foreign', 'English Audio', 'all', 5),
 ('Foreign', 'Surround', 'all', 5),
@@ -246,8 +246,8 @@ INSERT INTO quality_profile_qualities (quality_profile_name, quality_name, quali
 ('Comedy', 'DVD', NULL, 2, 1, 0),
 ('Comedy', NULL, '480p', 3, 1, 0),
 ('Comedy', 'SDTV', NULL, 4, 1, 0),
-('Comedy', 'DVD-R', NULL, 5, 0, 0),
 -- Disabled qualities
+('Comedy', 'DVD-R', NULL, 5, 0, 0),
 ('Comedy', 'Bluray-2160p', NULL, 6, 0, 0),
 ('Comedy', 'BR-DISK', NULL, 7, 0, 0),
 ('Comedy', 'CAM', NULL, 8, 0, 0),
@@ -269,7 +269,7 @@ INSERT INTO quality_profile_custom_formats (quality_profile_name, custom_format_
 ('Comedy', 'HDR', 'all', -1000),
 ('Comedy', 'Bad Source', 'radarr', -1000),
 ('Comedy', '4KUHD', 'all', -1000),
-('Comedy', '1080', 'all', 10);
+('Comedy', '720/1080', 'all', 10);
 
 INSERT INTO quality_profile_languages (quality_profile_name, language_name, type) VALUES
 ('Comedy', 'English', 'simple');
